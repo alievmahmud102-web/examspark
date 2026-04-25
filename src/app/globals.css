@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+:root {
+  --color-primary: #7c3aed;
+  --color-accent: #a3e635;
+  --color-bg: #0f0f0f;
+  --color-text: #ffffff;
+  --header-height: 72px;
+}
+
+@theme inline {
+  --color-primary: var(--color-primary);
+  --color-accent: var(--color-accent);
+  --color-background: var(--color-bg);
+  --color-foreground: var(--color-text);
+  --font-sans: var(--font-inter);
+  --font-heading: var(--font-unbounded);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-inter), Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-unbounded), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+::selection {
+  color: var(--color-bg);
+  background: var(--color-accent);
+}
+
+a,
+button {
+  transition:
+    transform 160ms ease,
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+a:hover,
+button:hover {
+  transform: translateY(-1px);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.hero-blob {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(124, 58, 237, 0.88) 0%,
+    rgba(163, 230, 53, 0.74) 62%,
+    rgba(163, 230, 53, 0) 100%
+  );
+  animation: blobPulse 10s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+.mockup-float {
+  animation: mockupFloat 7s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes blobPulse {
+  0%,
+  100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08) translate3d(0, -14px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes mockupFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.8deg);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0) rotate(0.8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-blob,
+  .mockup-float,
+  .preview-fade {
+    animation: none;
+  }
+}
+
+.preview-fade {
+  animation: previewFade 320ms ease;
+  will-change: transform, opacity;
+}
+
+@keyframes previewFade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
