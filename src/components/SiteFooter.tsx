@@ -43,12 +43,12 @@ export function SiteFooter() {
         <p>{t.rights}</p>
         <div className="flex flex-wrap items-center gap-4">
           <a
-            href="https://t.me/username"
+            href="https://t.me/aviron153"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white hover:text-accent"
           >
-            {t.telegramLabel}: @username
+            {t.telegramLabel}: @aviron153
           </a>
           <p>
             {t.languagesLabel}: <span className="text-white">RU / EN / UZ</span>
