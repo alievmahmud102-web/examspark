@@ -11,6 +11,8 @@
 @theme inline {
   --color-primary: var(--color-primary);
   --color-accent: var(--color-accent);
+  --color-dark-bg: var(--color-bg);
+  --color-text-primary: var(--color-text);
   --color-background: var(--color-bg);
   --color-foreground: var(--color-text);
   --font-sans: var(--font-inter);
@@ -26,6 +28,21 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-inter), Arial, sans-serif;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text);
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
+  caret-color: var(--color-text);
 }
 
 h1,
@@ -47,11 +64,11 @@ h6 {
 a,
 button {
   transition:
-    transform 160ms ease,
-    color 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+    transform 160ms ease-in-out,
+    color 180ms ease-in-out,
+    background-color 180ms ease-in-out,
+    border-color 180ms ease-in-out,
+    box-shadow 180ms ease-in-out;
 }
 
 a:hover,

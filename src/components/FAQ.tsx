@@ -39,50 +39,62 @@ export function FAQ() {
   const t = translations[language].faq;
 
   return (
-    <section id="faq" className="px-1 py-14 sm:py-20">
-      <div className="mb-8 space-y-4 sm:mb-10">
-        <h2 className="text-3xl leading-[1.05] text-white sm:text-4xl lg:text-5xl">
-          {t.sectionTitle}
-        </h2>
-        <p className="max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
-          {t.sectionSubtitle}
-        </p>
-      </div>
+    <section id="faq" className="px-5 py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-6 space-y-4 sm:mb-8">
+          <h2 className="text-3xl leading-[1.05] tracking-tighter text-text-primary sm:text-4xl lg:text-5xl">
+            {t.sectionTitle}
+          </h2>
+          <p className="max-w-2xl text-sm leading-relaxed text-zinc-400 sm:text-base">
+            {t.sectionSubtitle}
+          </p>
+        </div>
 
-      <div className="space-y-3">
-        {t.items.map((item, index) => {
-          const isOpen = openIndex === index;
+        <div className="border-t border-white/5">
+          {t.items.map((item, index) => {
+            const isOpen = openIndex === index;
 
-          return (
-            <article
-              key={item.question}
-              className="rounded-2xl border border-white/12 bg-[#1a1a1a] px-4 py-3 sm:px-5"
-            >
-              <button
-                type="button"
-                onClick={() => setOpenIndex(isOpen ? -1 : index)}
-                className="flex w-full items-center justify-between gap-4 py-1 text-left"
-                aria-expanded={isOpen}
-              >
-                <span className="text-sm font-semibold text-white sm:text-base">
-                  {item.question}
-                </span>
-                <span className="text-xl font-light text-accent">
-                  {isOpen ? "×" : "+"}
-                </span>
-              </button>
+            return (
+              <article key={item.question} className="border-b border-white/5 py-2">
+                <button
+                  type="button"
+                  onClick={() => setOpenIndex(isOpen ? -1 : index)}
+                  className="flex w-full items-center justify-between gap-4 px-0 py-4 text-left"
+                  aria-expanded={isOpen}
+                >
+                  <span
+                    className={[
+                      "text-sm font-bold tracking-tight transition-colors duration-300 sm:text-base",
+                      isOpen ? "text-accent" : "text-white",
+                    ].join(" ")}
+                  >
+                    {item.question}
+                  </span>
+                  <span
+                    className={[
+                      "text-xl font-light text-white/60 transition-transform duration-300",
+                      isOpen ? "rotate-45 text-accent" : "rotate-0",
+                    ].join(" ")}
+                    aria-hidden="true"
+                  >
+                    +
+                  </span>
+                </button>
 
-              <div
-                className={[
-                  "overflow-hidden transition-all duration-300 ease-out",
-                  isOpen ? "max-h-48 pt-2" : "max-h-0",
-                ].join(" ")}
-              >
-                <p className="text-sm leading-relaxed text-zinc-300">{item.answer}</p>
-              </div>
-            </article>
-          );
-        })}
+                <div
+                  className={[
+                    "overflow-hidden transition-all duration-300 ease-in-out",
+                    isOpen ? "max-h-48 pb-4" : "max-h-0",
+                  ].join(" ")}
+                >
+                  <p className="max-w-3xl pr-8 text-sm leading-relaxed text-white/50">
+                    {item.answer}
+                  </p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

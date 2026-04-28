@@ -28,10 +28,7 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div
-      className="inline-flex items-center gap-1 rounded-full border border-white/15 bg-white/5 p-1 backdrop-blur-sm"
-      aria-label="Language switcher"
-    >
+    <div className="inline-flex items-center gap-2" aria-label="Language switcher">
       {supportedLanguages.map((item) => {
         const isActive = item === language;
 
@@ -41,11 +38,11 @@ export function LanguageSwitcher() {
             type="button"
             onClick={() => handleChange(item)}
             className={[
-              "rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.16em]",
+              "text-xs font-medium uppercase tracking-tight",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
               isActive
-                ? "bg-accent text-black shadow-[0_0_18px_rgba(163,230,53,0.35)]"
-                : "text-white/80 hover:bg-primary hover:text-white",
+                ? "text-text-primary/90"
+                : "text-text-primary/45 hover:text-text-primary/75",
             ].join(" ")}
             aria-pressed={isActive}
           >

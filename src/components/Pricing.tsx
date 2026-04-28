@@ -57,69 +57,84 @@ export function Pricing() {
   }, []);
 
   const t = translations[language].pricing;
+  const recommendedLabel: Record<LanguageCode, string> = {
+    ru: "Рекомендуем",
+    en: "Recommended",
+    uz: "Tavsiya etiladi",
+  };
 
   return (
     <section
       id="pricing"
       ref={sectionRef}
       className={[
-        "px-1 py-14 transition-all duration-700 ease-out sm:py-20",
+        "px-1 py-16 transition-all duration-700 ease-in-out sm:py-24",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
       ].join(" ")}
     >
-      <div className="mb-8 space-y-4 sm:mb-10">
-        <h2 className="text-3xl leading-[1.05] text-white sm:text-4xl lg:text-5xl">
-          {t.sectionTitle}
-        </h2>
-      </div>
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-10 space-y-4 sm:mb-12">
+          <h2 className="text-3xl leading-[1.05] tracking-tighter text-text-primary sm:text-4xl lg:text-5xl">
+            {t.sectionTitle}
+          </h2>
+        </div>
 
-      <div className="rounded-[24px] bg-[linear-gradient(135deg,#7c3aed_0%,#a3e635_100%)] p-[1px]">
-        <div className="grid gap-4 rounded-[23px] bg-[#121212] p-5 sm:p-7 lg:grid-cols-[1fr_0.34fr]">
-          <div className="space-y-6">
-            <div className="flex flex-wrap items-end gap-4">
-              <p className="text-5xl font-black leading-none text-white sm:text-6xl">
-                {t.price}
-              </p>
-              <p className="mb-1 text-xl text-zinc-500 line-through sm:text-2xl">
-                {t.freelancerPrice}
-              </p>
+        <div className="relative overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.03] ring-1 ring-primary/10">
+          <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-accent/70" />
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(163,230,53,0.08),transparent_45%)]" />
+          <div className="grid gap-4 rounded-[27px] bg-dark-bg/90 p-5 backdrop-blur-sm sm:p-7 lg:grid-cols-[1fr_0.34fr]">
+            <div className="space-y-6">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold tracking-tight text-dark-bg">
+                  {recommendedLabel[language]}
+                </span>
+              </div>
+
+              <div className="flex flex-wrap items-end gap-4">
+                <p className="text-5xl font-black leading-none tracking-tighter text-text-primary sm:text-6xl">
+                  {t.price}
+                </p>
+                <p className="mb-1 text-xl text-zinc-500 line-through sm:text-2xl">
+                  {t.freelancerPrice}
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <p className="text-base font-semibold text-white">{t.includedTitle}</p>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {t.includedItems.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-relaxed text-zinc-300"
+                    >
+                      <span className="mt-[2px] inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs text-accent">
+                        ✓
+                      </span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <a
+                href="#order-form"
+                className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-4 text-base font-bold text-dark-bg sm:w-auto sm:min-w-[320px]"
+              >
+                {t.cta}
+              </a>
             </div>
 
-            <div className="space-y-3">
-              <p className="text-base font-semibold text-white">{t.includedTitle}</p>
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {t.includedItems.map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-2 text-sm leading-relaxed text-zinc-300"
-                  >
-                    <span className="mt-[2px] inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xs text-accent">
-                      ✓
-                    </span>
-                    <span>{item}</span>
+            <aside className="rounded-2xl border border-white/10 bg-white/[0.04] p-4 backdrop-blur-sm">
+              <ul className="space-y-3">
+                {t.trustItems.map((item) => (
+                  <li key={item} className="text-sm text-zinc-300">
+                    <span className="mr-2 text-accent">●</span>
+                    {item}
                   </li>
                 ))}
               </ul>
-            </div>
-
-            <a
-              href="#order-form"
-              className="inline-flex w-full items-center justify-center rounded-full bg-accent px-6 py-4 text-base font-black text-black hover:shadow-[0_0_28px_rgba(163,230,53,0.45)] sm:w-auto sm:min-w-[320px]"
-            >
-              {t.cta}
-            </a>
+            </aside>
           </div>
-
-          <aside className="rounded-2xl border border-white/12 bg-[#1a1a1a] p-4">
-            <ul className="space-y-3">
-              {t.trustItems.map((item) => (
-                <li key={item} className="text-sm text-zinc-300">
-                  <span className="mr-2 text-accent">●</span>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </aside>
         </div>
       </div>
     </section>

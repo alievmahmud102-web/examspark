@@ -60,12 +60,12 @@ const CounterCard = memo(function CounterCard({
   start: boolean;
 }) {
   const animatedValue = useCountUp(value, start);
+  const formattedValue = suffix === "$" ? `$${animatedValue}` : `${animatedValue}${suffix}`;
 
   return (
-    <div className="rounded-2xl border border-white/12 bg-[#1a1a1a] p-5">
-      <p className="text-4xl font-black text-accent sm:text-5xl">
-        {animatedValue}
-        {suffix}
+    <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
+      <p className="text-4xl font-black tracking-tighter text-accent sm:text-5xl">
+        {formattedValue}
       </p>
       <p className="mt-2 text-sm text-zinc-400">{label}</p>
     </div>
@@ -109,46 +109,50 @@ export function SocialProof() {
   const t = translations[language].socialProof;
 
   return (
-    <section id="social-proof" ref={rootRef} className="px-1 py-14 sm:py-20">
-      <div className="grid gap-4 sm:grid-cols-3">
-        {t.counters.map((counter) => (
-          <CounterCard
-            key={counter.label}
-            value={counter.value}
-            suffix={counter.suffix}
-            label={counter.label}
-            start={startCounter}
-          />
-        ))}
-      </div>
+    <section id="social-proof" ref={rootRef} className="relative isolate px-1 py-16 sm:py-24">
+      <div className="pointer-events-none absolute inset-x-0 top-10 -z-10 mx-auto h-44 max-w-5xl rounded-full bg-primary/20 blur-3xl opacity-20" />
 
-      <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {t.reviews.map((review) => (
-          <article
-            key={`${review.name}-${review.city}`}
-            className="rounded-2xl border border-white/12 bg-[#1a1a1a] p-5"
-          >
-            <div className="mb-4 flex items-center gap-3">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-primary to-accent text-sm font-black text-black">
-                {review.initials}
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-4 sm:grid-cols-3">
+          {t.counters.map((counter) => (
+            <CounterCard
+              key={counter.label}
+              value={counter.value}
+              suffix={counter.suffix}
+              label={counter.label}
+              start={startCounter}
+            />
+          ))}
+        </div>
+
+        <div className="mt-8 grid gap-4 md:grid-cols-3">
+          {t.reviews.map((review) => (
+            <article
+              key={`${review.name}-${review.city}`}
+              className="rounded-2xl border border-white/10 bg-white/[0.05] p-5 backdrop-blur-md"
+            >
+              <div className="mb-4 flex items-center gap-3">
+                <div className="flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-gradient-to-br from-white/14 via-white/8 to-primary/22 text-sm font-black text-text-primary">
+                  {review.initials}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-white">{review.name}</p>
+                  <p className="text-xs text-white/60">{review.city}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm font-semibold text-white">{review.name}</p>
-                <p className="text-xs text-zinc-400">{review.city}</p>
+
+              <div className="mb-3 flex gap-1 text-accent" aria-label="5 of 5 stars">
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
+                <span>★</span>
               </div>
-            </div>
 
-            <div className="mb-3 flex gap-1 text-accent" aria-label="5 of 5 stars">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-            </div>
-
-            <p className="text-sm leading-relaxed text-zinc-300">{review.text}</p>
-          </article>
-        ))}
+              <p className="text-sm leading-relaxed text-zinc-300">{review.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

@@ -71,9 +71,17 @@ export default function RootLayout({
       lang="ru"
       className={`${inter.variable} ${unbounded.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">
+      <body className="relative min-h-full bg-background text-foreground">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none fixed inset-0 z-0 opacity-[0.06] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E\")",
+          }}
+        />
         <SiteHeader />
-        <div className="mx-auto flex min-h-screen w-full max-w-[1440px] flex-col">
+        <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl flex-col">
           <main className="flex-1 px-4 pb-10 md:px-8">{children}</main>
           <SiteFooter />
         </div>

@@ -93,7 +93,7 @@ const emptyTranslation: TranslationSchema = {
     contacts: "",
   },
   hero: {
-    title: "Готовый сайт для учебного центра - за 1 день",
+    title: "Готовый сайт для учебного центра за 1 день",
     subtitle:
       "Запустите продажи курсов ЕГЭ/ОГЭ/ЦТ без долгой разработки: шаблон экономит недели времени и сотни долларов бюджета.",
     ctaDemo: "Смотреть демо",
@@ -117,7 +117,7 @@ const emptyTranslation: TranslationSchema = {
         description: "Удобный блок занятий с фильтром по предмету и формату.",
       },
       {
-        title: 'Sticky-кнопка "Записаться на пробный урок"',
+        title: "Кнопка записи на урок",
         description:
           "Постоянный CTA на экране повышает конверсию в обращения.",
       },
@@ -173,7 +173,7 @@ const emptyTranslation: TranslationSchema = {
     namePlaceholder: "Ваше имя",
     contactLabel: "Телефон или Telegram",
     contactPlaceholder: "@username или +998...",
-    submit: "Хочу купить - свяжитесь со мной",
+    submit: "Оставить заявку",
     submitting: "Отправляю...",
     success: "Отлично! Напишу вам в течение 2 часов",
     nameRequired: "Введите имя",
@@ -249,7 +249,7 @@ const emptyTranslation: TranslationSchema = {
     ],
   },
   footer: {
-    rights: "ExamSpark Template. Все права защищены.",
+    rights: "2026 ExamSpark Template. Все права защищены.",
     telegramLabel: "Telegram",
     languagesLabel: "Языки",
   },
@@ -263,7 +263,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
   en: {
     ...emptyTranslation,
     hero: {
-      title: "Ready-made website for an education center - in 1 day",
+      title: "Ready-made website for an education center in 1 day",
       subtitle:
         "Launch your SAT/entry prep offers fast: this template saves weeks of build time and hundreds of dollars in development costs.",
       ctaDemo: "View demo",
@@ -348,7 +348,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       namePlaceholder: "Your name",
       contactLabel: "Phone or Telegram",
       contactPlaceholder: "@username or +1...",
-      submit: "I want to buy - contact me",
+      submit: "Contact me",
       submitting: "Sending...",
       success: "Great! I will text you within 2 hours",
       nameRequired: "Please enter your name",
@@ -424,7 +424,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       ],
     },
     footer: {
-      rights: "ExamSpark Template. All rights reserved.",
+      rights: "2026 ExamSpark Template. All rights reserved.",
       telegramLabel: "Telegram",
       languagesLabel: "Languages",
     },
@@ -435,7 +435,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
   uz: {
     ...emptyTranslation,
     hero: {
-      title: "O'quv markazi uchun tayyor sayt - 1 kunda",
+      title: "O'quv markazi uchun tayyor sayt 1 kunda",
       subtitle:
         "EGE/OGE/CT bo'yicha kurslarni tez sotishni boshlang: bu shablon haftalab vaqt va yuzlab dollar byudjetni tejaydi.",
       ctaDemo: "Demo ko'rish",
@@ -520,7 +520,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       namePlaceholder: "Ismingiz",
       contactLabel: "Telefon yoki Telegram",
       contactPlaceholder: "@username yoki +998...",
-      submit: "Sotib olmoqchiman - men bilan bog'laning",
+      submit: "Ariza qoldirish",
       submitting: "Yuborilmoqda...",
       success: "Ajoyib! Sizga 2 soat ichida yozaman",
       nameRequired: "Ismingizni kiriting",
@@ -596,7 +596,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       ],
     },
     footer: {
-      rights: "ExamSpark Template. Barcha huquqlar himoyalangan.",
+      rights: "2026 ExamSpark Template. Barcha huquqlar himoyalangan.",
       telegramLabel: "Telegram",
       languagesLabel: "Tillar",
     },
