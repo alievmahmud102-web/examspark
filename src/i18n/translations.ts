@@ -174,7 +174,7 @@ const emptyTranslation: TranslationSchema = {
     contactLabel: "Телефон или Telegram",
     contactPlaceholder: "@username или +998...",
     submit: "Оставить заявку",
-    submitting: "Отправляю...",
+    submitting: "Отправка...",
     success: "Отлично! Напишу вам в течение 2 часов",
     nameRequired: "Введите имя",
     contactRequired: "Введите телефон или Telegram",

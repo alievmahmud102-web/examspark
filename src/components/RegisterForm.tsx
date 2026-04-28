@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
-import emailjs from "@emailjs/browser";
 
 import {
   supportedLanguages,
@@ -43,12 +42,20 @@ export function RegisterForm() {
   }, []);
 
   const t = translations[language].registerForm;
+  const invalidContactMessage: Record<LanguageCode, string> = {
+    ru: "Введите корректный телефон или Telegram (минимум 5 символов).",
+    en: "Please enter a valid phone or Telegram (at least 5 characters).",
+    uz: "Telefon yoki Telegramni to‘g‘ri kiriting (kamida 5 belgi).",
+  };
 
   const validate = () => {
     const nextErrors: { name?: string; contact?: string } = {};
 
     if (!name.trim()) nextErrors.name = t.nameRequired;
     if (!contact.trim()) nextErrors.contact = t.contactRequired;
+    if (contact.trim() && contact.trim().length < 5) {
+      nextErrors.contact = invalidContactMessage[language];
+    }
 
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -61,45 +68,53 @@ export function RegisterForm() {
 
     if (!validate()) return;
 
-    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
-    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
-
-    if (!serviceId || !templateId || !publicKey) {
-      setSendError(t.sendError);
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
           name: name.trim(),
           contact: contact.trim(),
-          user_name: name.trim(),
-          user_contact: contact.trim(),
-          reply_to: contact.trim(),
-          message: `Новая заявка: ${name.trim()} | ${contact.trim()}`,
-          source: "education-template-landing",
-        },
-        {
-          publicKey,
-        },
-      );
+          lang: language,
+        }),
+      });
+
+      if (!response.ok) {
+        const text = await response.text().catch(() => "");
+        const payload = (() => {
+          try {
+            return JSON.parse(text) as unknown;
+          } catch {
+            return null;
+          }
+        })();
+        console.error("Contact form request failed", {
+          status: response.status,
+          payload: payload ?? text,
+        });
+        const serverError =
+          payload && typeof payload === "object" && payload !== null
+            ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              (payload as any).error
+            : undefined;
+
+        setSendError(
+          typeof serverError === "string"
+            ? serverError
+            : `${t.sendError} (HTTP ${response.status})`,
+        );
+        return;
+      }
 
       setName("");
       setContact("");
       setErrors({});
       setIsSuccess(true);
-    } catch {
-      setSendError(
-        process.env.NODE_ENV === "development"
-          ? `${t.sendError} (Проверьте Service ID / Template ID / Public Key и поля шаблона в EmailJS.)`
-          : t.sendError,
-      );
+    } catch (error) {
+      console.error("Contact form request error", error);
+      setSendError(`${t.sendError} (Network error)`);
     } finally {
       setIsSubmitting(false);
     }
@@ -126,7 +141,13 @@ export function RegisterForm() {
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder={t.namePlaceholder}
-                className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none focus:border-accent focus:ring-2 focus:ring-accent/35"
+                className={[
+                  "w-full rounded-xl border bg-white/5 px-4 py-3 text-white outline-none",
+                  "focus:ring-2",
+                  errors.name
+                    ? "border-red-400 focus:border-red-400 focus:ring-red-400/25"
+                    : "border-white/15 focus:border-accent focus:ring-accent/35",
+                ].join(" ")}
                 aria-invalid={Boolean(errors.name)}
               />
               {errors.name && <p className="text-sm text-red-400">{errors.name}</p>}
@@ -143,7 +164,13 @@ export function RegisterForm() {
                 value={contact}
                 onChange={(event) => setContact(event.target.value)}
                 placeholder={t.contactPlaceholder}
-                className="w-full rounded-xl border border-white/15 bg-white/5 px-4 py-3 text-white outline-none focus:border-accent focus:ring-2 focus:ring-accent/35"
+                className={[
+                  "w-full rounded-xl border bg-white/5 px-4 py-3 text-white outline-none",
+                  "focus:ring-2",
+                  errors.contact
+                    ? "border-red-400 focus:border-red-400 focus:ring-red-400/25"
+                    : "border-white/15 focus:border-accent focus:ring-accent/35",
+                ].join(" ")}
                 aria-invalid={Boolean(errors.contact)}
               />
               {errors.contact && <p className="text-sm text-red-400">{errors.contact}</p>}
