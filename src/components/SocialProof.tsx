@@ -1,12 +1,13 @@
 "use client";
 
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import {
   supportedLanguages,
   translations,
   type LanguageCode,
 } from "@/i18n/translations";
+import { isNarrowMotionViewport } from "@/lib/breakpoints";
 
 const storageKey = "site-language";
 
@@ -53,14 +54,18 @@ const CounterCard = memo(function CounterCard({
   suffix,
   label,
   start,
+  instant,
 }: {
   value: number;
   suffix: string;
   label: string;
   start: boolean;
+  instant: boolean;
 }) {
-  const animatedValue = useCountUp(value, start);
-  const formattedValue = suffix === "$" ? `$${animatedValue}` : `${animatedValue}${suffix}`;
+  const animatedValue = useCountUp(value, start && !instant);
+  const displayValue = instant && start ? value : animatedValue;
+  const formattedValue =
+    suffix === "$" ? `$${displayValue}` : `${displayValue}${suffix}`;
 
   return (
     <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-5 backdrop-blur-sm">
@@ -75,6 +80,7 @@ const CounterCard = memo(function CounterCard({
 export function SocialProof() {
   const [language, setLanguage] = useState<LanguageCode>(getLanguageFromStorage);
   const [startCounter, setStartCounter] = useState(false);
+  const [instantCounters, setInstantCounters] = useState(false);
   const rootRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -87,9 +93,17 @@ export function SocialProof() {
     };
   }, []);
 
+  useLayoutEffect(() => {
+    if (!isNarrowMotionViewport()) return;
+    setInstantCounters(true);
+    setStartCounter(true);
+  }, []);
+
   useEffect(() => {
     const node = rootRef.current;
     if (!node) return;
+
+    if (isNarrowMotionViewport()) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -121,6 +135,7 @@ export function SocialProof() {
               suffix={counter.suffix}
               label={counter.label}
               start={startCounter}
+              instant={instantCounters}
             />
           ))}
         </div>

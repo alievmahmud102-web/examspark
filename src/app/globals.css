@@ -132,6 +132,15 @@ select:focus-visible {
   }
 }
 
+/* Телефоны: без «плавающих» декоративных анимаций (меньше работы GPU и отвлечений) */
+@media (max-width: 767px) {
+  .hero-blob,
+  .mockup-float,
+  .preview-fade {
+    animation: none !important;
+  }
+}
+
 .preview-fade {
   animation: previewFade 320ms ease;
   will-change: transform, opacity;

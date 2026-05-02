@@ -16,6 +16,7 @@ import {
   translations,
   type LanguageCode,
 } from "@/i18n/translations";
+import { isNarrowMotionViewport } from "@/lib/breakpoints";
 
 const storageKey = "site-language";
 
@@ -58,6 +59,8 @@ export function Features() {
   }, []);
 
   useEffect(() => {
+    if (isNarrowMotionViewport()) return;
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -118,15 +121,18 @@ export function Features() {
                   data-index={index}
                   className={[
                     "group rounded-2xl border border-white/10 bg-white/[0.02] p-5 backdrop-blur-sm",
-                    "transition duration-500 ease-in-out hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_0_1px_rgba(163,230,53,0.08),0_26px_70px_rgba(163,230,53,0.06)]",
+                    "max-md:translate-y-0 max-md:opacity-100",
+                    "transition duration-500 ease-in-out max-md:transition-none",
+                    "hover:-translate-y-1 hover:border-accent/20 hover:shadow-[0_0_0_1px_rgba(163,230,53,0.08),0_26px_70px_rgba(163,230,53,0.06)] max-md:hover:translate-y-0",
                     visible[index]
                       ? "translate-y-0 opacity-100"
                       : "translate-y-6 opacity-0",
+                    "max-md:delay-0",
                   ].join(" ")}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex flex-nowrap items-start gap-4">
-                    <div className="relative mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/14 text-text-primary transition-transform duration-300 ease-in-out group-hover:-translate-y-1">
+                    <div className="relative mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/14 text-text-primary transition-transform duration-300 ease-in-out group-hover:-translate-y-1 max-md:transition-none max-md:group-hover:translate-y-0">
                       <div
                         aria-hidden="true"
                         className="pointer-events-none absolute inset-0 rounded-xl bg-white/10 blur-[1px]"

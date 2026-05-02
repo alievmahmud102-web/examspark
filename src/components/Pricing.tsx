@@ -7,6 +7,7 @@ import {
   translations,
   type LanguageCode,
 } from "@/i18n/translations";
+import { isNarrowMotionViewport } from "@/lib/breakpoints";
 
 const storageKey = "site-language";
 
@@ -41,6 +42,11 @@ export function Pricing() {
     const node = sectionRef.current;
     if (!node) return;
 
+    if (isNarrowMotionViewport()) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -69,6 +75,7 @@ export function Pricing() {
       ref={sectionRef}
       className={[
         "px-1 py-16 transition-all duration-700 ease-in-out sm:py-24",
+        "max-md:translate-y-0 max-md:opacity-100 max-md:transition-none",
         isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0",
       ].join(" ")}
     >
