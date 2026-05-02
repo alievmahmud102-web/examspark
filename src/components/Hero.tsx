@@ -58,7 +58,7 @@ export function Hero() {
     >
       <div className="hero-blob pointer-events-none absolute left-[-180px] top-[-130px] -z-10 h-[420px] w-[420px] rounded-full blur-3xl md:left-[48%] md:top-[-180px] md:h-[520px] md:w-[520px]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-6 lg:gap-12">
+      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-6 lg:gap-12 [@media(max-aspect-ratio:1/1)]:md:grid-cols-1">
         <div className="space-y-7">
           <h1 className="max-w-4xl text-4xl leading-[1.15] font-black tracking-tighter text-text-primary sm:text-5xl sm:leading-[1.12] lg:text-7xl lg:leading-[1.08]">
             {titleSuffix ? (
@@ -97,7 +97,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="relative mx-auto w-full max-w-[560px] md:ml-auto">
+        <div className="relative mx-auto w-full max-w-[560px] md:ml-auto [@media(max-aspect-ratio:1/1)]:hidden">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -inset-10 -z-10 rounded-[40px] bg-[radial-gradient(circle_at_25%_30%,rgba(163,230,53,0.22),transparent_55%),radial-gradient(circle_at_78%_22%,rgba(124,58,237,0.26),transparent_55%)] blur-3xl"
