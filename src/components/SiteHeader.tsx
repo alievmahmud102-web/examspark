@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 
 import { LanguageSwitcher } from "@/components/language-switcher";
 import {
@@ -21,14 +22,29 @@ function getLanguageFromStorage(): LanguageCode {
 }
 
 const navKeys = [
-  { href: "#hero", key: "home" as const },
   { href: "#features", key: "features" as const },
   { href: "#pricing", key: "pricing" as const },
-  { href: "#order-form", key: "contacts" as const },
+  { href: "#faq", key: "faq" as const },
 ];
+
+function navLinkClassName() {
+  return [
+    "text-sm font-medium text-white/70 transition-colors",
+    "hover:text-white",
+  ].join(" ");
+}
+
+function ctaClassName() {
+  return [
+    "inline-flex shrink-0 items-center justify-center rounded-full border border-white/35",
+    "bg-transparent px-5 py-2 text-sm font-semibold text-white no-underline",
+    "transition-colors hover:border-white/55 hover:bg-white/10",
+  ].join(" ");
+}
 
 export function SiteHeader() {
   const [language, setLanguage] = useState<LanguageCode>(getLanguageFromStorage);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const sync = () => setLanguage(getLanguageFromStorage());
@@ -40,40 +56,125 @@ export function SiteHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   const t = translations[language];
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#0f0f0f]/85 backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-x-4 gap-y-3 px-4 py-3 sm:px-5">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-black">
+      <div className="mx-auto flex h-[var(--header-height)] max-w-6xl items-center justify-between px-4 sm:px-5">
         <a
           href="#hero"
-          className="font-[family-name:var(--font-unbounded)] text-sm font-extrabold tracking-tight text-text-primary sm:text-base"
+          className="font-[family-name:var(--font-unbounded)] text-base font-extrabold tracking-tight text-white no-underline"
+          onClick={closeMenu}
         >
           Language Vision
         </a>
 
-        <nav
-          className="order-3 flex w-full flex-wrap items-center justify-center gap-x-1 gap-y-2 sm:order-none sm:flex-1 sm:justify-center md:w-auto"
-          aria-label="Main"
-        >
-          {navKeys.map(({ href, key }) => (
-            <a
-              key={key}
-              href={href}
-              className="rounded-full px-3 py-1.5 text-xs font-medium text-text-primary/75 transition-colors hover:bg-white/5 hover:text-text-primary sm:text-sm"
-            >
-              {t.nav[key]}
+        {/* Desktop: навигация + язык + CTA */}
+        <div className="hidden items-center gap-8 md:flex">
+          <nav className="flex items-center gap-8" aria-label="Main">
+            {navKeys.map(({ href, key }) => (
+              <a key={key} href={href} className={navLinkClassName()}>
+                {t.nav[key]}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-5">
+            <LanguageSwitcher />
+            <a href="#order-form" className={ctaClassName()}>
+              {t.header.buyCta}
             </a>
-          ))}
-        </nav>
+          </div>
+        </div>
 
-        <div className="flex items-center gap-3 sm:gap-4">
-          <LanguageSwitcher />
+        {/* Mobile: только гамбургер */}
+        <button
+          type="button"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white transition-colors hover:border-white/40 hover:bg-white/5 md:hidden"
+          onClick={() => setMenuOpen(true)}
+          aria-expanded={menuOpen}
+          aria-label={t.header.menuOpenLabel}
+        >
+          <Menu size={22} strokeWidth={2} aria-hidden />
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      <div
+        className={[
+          "fixed inset-0 z-[100] md:hidden",
+          menuOpen ? "pointer-events-auto" : "pointer-events-none",
+        ].join(" ")}
+        aria-hidden={!menuOpen}
+      >
+        <button
+          type="button"
+          className={[
+            "absolute inset-0 bg-black/70 transition-opacity",
+            menuOpen ? "opacity-100" : "opacity-0",
+          ].join(" ")}
+          onClick={closeMenu}
+          aria-label={t.header.menuCloseLabel}
+        />
+        <div
+          className={[
+            "absolute right-0 top-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-white/10 bg-black px-5 pb-8 pt-4 shadow-2xl transition-transform duration-200 ease-out",
+            menuOpen ? "translate-x-0" : "translate-x-full",
+          ].join(" ")}
+        >
+          <div className="flex justify-end">
+            <button
+              type="button"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/20 text-white hover:bg-white/5"
+              onClick={closeMenu}
+              aria-label={t.header.menuCloseLabel}
+            >
+              <X size={22} strokeWidth={2} aria-hidden />
+            </button>
+          </div>
+
+          <nav className="mt-6 flex flex-col gap-1" aria-label="Main">
+            {navKeys.map(({ href, key }) => (
+              <a
+                key={key}
+                href={href}
+                className="rounded-lg px-2 py-3 text-base font-medium text-white/90 hover:bg-white/5"
+                onClick={closeMenu}
+              >
+                {t.nav[key]}
+              </a>
+            ))}
+          </nav>
+
+          <div className="mt-8 border-t border-white/10 pt-6">
+            <p className="mb-3 text-xs font-medium uppercase tracking-wide text-white/40">
+              {t.header.languageGroupLabel}
+            </p>
+            <LanguageSwitcher />
+          </div>
+
           <a
             href="#order-form"
-            className="inline-flex shrink-0 items-center justify-center rounded-full bg-accent px-4 py-2 text-xs font-bold text-dark-bg no-underline hover:brightness-105 sm:px-5 sm:text-sm"
+            className={`${ctaClassName()} mt-8 w-full justify-center py-3`}
+            onClick={closeMenu}
           >
-            {t.header.buyCta}
+            <span className="sm:hidden">{t.header.buyCtaShort}</span>
+            <span className="hidden sm:inline">{t.header.buyCta}</span>
           </a>
         </div>
       </div>

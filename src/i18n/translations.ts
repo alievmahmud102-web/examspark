@@ -14,6 +14,7 @@ type TranslationSchema = {
     home: string;
     features: string;
     pricing: string;
+    faq: string;
     contacts: string;
   };
   hero: {
@@ -95,6 +96,10 @@ type TranslationSchema = {
   };
   header: {
     buyCta: string;
+    buyCtaShort: string;
+    menuOpenLabel: string;
+    menuCloseLabel: string;
+    languageGroupLabel: string;
   };
 };
 
@@ -103,6 +108,7 @@ const emptyTranslation: TranslationSchema = {
     home: "Главная",
     features: "Преимущества",
     pricing: "Программы",
+    faq: "FAQ",
     contacts: "Контакты",
   },
   hero: {
@@ -276,6 +282,10 @@ const emptyTranslation: TranslationSchema = {
   },
   header: {
     buyCta: "Записаться на урок",
+    buyCtaShort: "Запись",
+    menuOpenLabel: "Открыть меню",
+    menuCloseLabel: "Закрыть меню",
+    languageGroupLabel: "Язык",
   },
 };
 
@@ -286,7 +296,8 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
     nav: {
       home: "Home",
       features: "Features",
-      pricing: "Programs",
+      pricing: "Pricing",
+      faq: "FAQ",
       contacts: "Contacts",
     },
     hero: {
@@ -457,6 +468,10 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
     },
     header: {
       buyCta: "Book a lesson",
+      buyCtaShort: "Book",
+      menuOpenLabel: "Open menu",
+      menuCloseLabel: "Close menu",
+      languageGroupLabel: "Language",
     },
   },
   uz: {
@@ -465,6 +480,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       home: "Bosh sahifa",
       features: "Afzalliklar",
       pricing: "Dasturlar",
+      faq: "FAQ",
       contacts: "Kontaktlar",
     },
     hero: {
@@ -637,6 +653,10 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
     },
     header: {
       buyCta: "Darsga yozilish",
+      buyCtaShort: "Yozilish",
+      menuOpenLabel: "Menyuni ochish",
+      menuCloseLabel: "Yopish",
+      languageGroupLabel: "Til",
     },
   },
 };
