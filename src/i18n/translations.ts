@@ -2,6 +2,13 @@ export const supportedLanguages = ["ru", "en", "uz"] as const;
 
 export type LanguageCode = (typeof supportedLanguages)[number];
 
+/** Подписи языков для переключателя и `title` у кнопок */
+export const languageNativeNames: Record<LanguageCode, string> = {
+  ru: "Русский",
+  en: "English",
+  uz: "Oʻzbekcha",
+};
+
 type TranslationSchema = {
   nav: {
     home: string;
@@ -81,6 +88,8 @@ type TranslationSchema = {
   };
   footer: {
     rights: string;
+    address: string;
+    phoneLabel: string;
     telegramLabel: string;
     languagesLabel: string;
   };
@@ -260,7 +269,9 @@ const emptyTranslation: TranslationSchema = {
   },
   footer: {
     rights: "© 2026 Language Vision",
-    telegramLabel: "Телефон / Telegram",
+    address: "Ташкент, Буюк Ипак Йули",
+    phoneLabel: "Телефон",
+    telegramLabel: "Telegram",
     languagesLabel: "Instagram",
   },
   header: {
@@ -439,7 +450,9 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
     },
     footer: {
       rights: "© 2026 Language Vision",
-      telegramLabel: "Phone / Telegram",
+      address: "Tashkent, Buyuk Ipak Yuli",
+      phoneLabel: "Phone",
+      telegramLabel: "Telegram",
       languagesLabel: "Instagram",
     },
     header: {
@@ -617,7 +630,9 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
     },
     footer: {
       rights: "© 2026 Language Vision",
-      telegramLabel: "Telefon / Telegram",
+      address: "Toshkent, Buyuk Ipak Yuli",
+      phoneLabel: "Telefon",
+      telegramLabel: "Telegram",
       languagesLabel: "Instagram",
     },
     header: {

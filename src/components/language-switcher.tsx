@@ -1,25 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { supportedLanguages, type LanguageCode } from "@/i18n/translations";
+import {
+  languageNativeNames,
+  supportedLanguages,
+  type LanguageCode,
+} from "@/i18n/translations";
 
 const storageKey = "site-language";
 
-export function LanguageSwitcher() {
-  const [language, setLanguage] = useState<LanguageCode>(() => {
-    if (typeof window === "undefined") {
-      return "ru";
-    }
-
-    const saved = localStorage.getItem(storageKey);
-
-    if (saved && supportedLanguages.includes(saved as LanguageCode)) {
-      return saved as LanguageCode;
-    }
-
+function getLanguageFromStorage(): LanguageCode {
+  if (typeof window === "undefined") {
     return "ru";
-  });
+  }
+
+  const saved = localStorage.getItem(storageKey);
+
+  if (saved && supportedLanguages.includes(saved as LanguageCode)) {
+    return saved as LanguageCode;
+  }
+
+  return "ru";
+}
+
+export function LanguageSwitcher() {
+  const [language, setLanguage] = useState<LanguageCode>(getLanguageFromStorage);
+
+  useEffect(() => {
+    const sync = () => setLanguage(getLanguageFromStorage());
+    window.addEventListener("storage", sync);
+    window.addEventListener("languageChange", sync);
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("languageChange", sync);
+    };
+  }, []);
 
   const handleChange = (nextLanguage: LanguageCode) => {
     setLanguage(nextLanguage);
@@ -28,7 +44,11 @@ export function LanguageSwitcher() {
   };
 
   return (
-    <div className="inline-flex items-center gap-2" aria-label="Language switcher">
+    <div
+      className="inline-flex items-center gap-1 rounded-full border border-white/10 bg-white/[0.04] px-1.5 py-1"
+      role="group"
+      aria-label="Language"
+    >
       {supportedLanguages.map((item) => {
         const isActive = item === language;
 
@@ -37,12 +57,13 @@ export function LanguageSwitcher() {
             key={item}
             type="button"
             onClick={() => handleChange(item)}
+            title={languageNativeNames[item]}
             className={[
-              "text-xs font-medium uppercase tracking-tight",
+              "rounded-full px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide sm:px-3 sm:text-xs",
               "focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
               isActive
-                ? "text-text-primary/90"
-                : "text-text-primary/45 hover:text-text-primary/75",
+                ? "bg-accent/20 text-accent"
+                : "text-text-primary/50 hover:bg-white/5 hover:text-text-primary/85",
             ].join(" ")}
             aria-pressed={isActive}
           >

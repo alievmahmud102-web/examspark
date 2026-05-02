@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Unbounded } from "next/font/google";
 
+import { DocumentLang } from "@/components/DocumentLang";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -27,8 +29,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru" className={`${inter.variable} ${unbounded.variable}`}>
-      <body className="antialiased">{children}</body>
+    <html lang="ru" suppressHydrationWarning className={`${inter.variable} ${unbounded.variable}`}>
+      <body className="antialiased">
+        <DocumentLang />
+        {children}
+      </body>
     </html>
   );
 }
