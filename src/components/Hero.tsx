@@ -43,13 +43,9 @@ export function Hero() {
     en: "3-6",
     uz: "3-6",
   };
-  const trustLines: Record<LanguageCode, string> = {
-    ru: "★ Более 500+ учеников уже улучшили свои результаты IELTS",
-    en: "★ Over 500+ students already improved their IELTS results",
-    uz: "★ 500+ o'quvchi IELTS natijalarini allaqachon yaxshiladi",
-  };
   const accentPhrase = accentPhrases[language];
   const [titlePrefix, titleSuffix = ""] = t.title.split(accentPhrase);
+  const [titleCompactPrefix, titleCompactSuffix = ""] = t.titleCompact.split(accentPhrase);
 
   return (
     <section
@@ -58,42 +54,65 @@ export function Hero() {
     >
       <div className="hero-blob pointer-events-none absolute left-[-180px] top-[-130px] -z-10 h-[420px] w-[420px] rounded-full blur-3xl md:left-[48%] md:top-[-180px] md:h-[520px] md:w-[520px]" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-6 lg:gap-12 [@media(max-aspect-ratio:1/1)]:md:grid-cols-1">
-        <div className="space-y-7">
-          <h1 className="max-w-4xl text-4xl leading-[1.15] font-black tracking-tighter text-text-primary sm:text-5xl sm:leading-[1.12] lg:text-7xl lg:leading-[1.08]">
-            {titleSuffix ? (
-              <>
-                {titlePrefix}
-                <span className="text-accent">{accentPhrase}</span>
-                {titleSuffix}
-              </>
-            ) : (
-              t.title
-            )}
+      <div className="mx-auto grid max-w-6xl items-center gap-10 md:grid-cols-[1.1fr_0.9fr] md:gap-6 lg:gap-12 [@media(max-aspect-ratio:1/1)]:md:grid-cols-1 [@media(max-aspect-ratio:1/1)]:gap-6">
+        <div className="space-y-7 [@media(max-aspect-ratio:1/1)]:space-y-4">
+          <h1 className="max-w-4xl text-4xl font-black leading-[1.15] tracking-tighter text-text-primary sm:text-5xl sm:leading-[1.12] lg:text-7xl lg:leading-[1.08] [@media(max-aspect-ratio:1/1)]:max-w-[22ch] [@media(max-aspect-ratio:1/1)]:text-2xl [@media(max-aspect-ratio:1/1)]:leading-[1.12] [@media(max-aspect-ratio:1/1)]:sm:text-3xl [@media(max-aspect-ratio:1/1)]:sm:leading-[1.1] [@media(max-aspect-ratio:1/1)]:lg:text-4xl [@media(max-aspect-ratio:1/1)]:lg:leading-[1.08]">
+            <span className="[@media(max-aspect-ratio:1/1)]:hidden">
+              {titleSuffix ? (
+                <>
+                  {titlePrefix}
+                  <span className="text-accent">{accentPhrase}</span>
+                  {titleSuffix}
+                </>
+              ) : (
+                t.title
+              )}
+            </span>
+            <span className="hidden [@media(max-aspect-ratio:1/1)]:inline">
+              {titleCompactSuffix ? (
+                <>
+                  {titleCompactPrefix}
+                  <span className="text-accent">{accentPhrase}</span>
+                  {titleCompactSuffix}
+                </>
+              ) : (
+                t.titleCompact
+              )}
+            </span>
           </h1>
-          <p className="max-w-2xl text-base leading-relaxed text-text-primary/85 sm:text-lg">
-            {t.subtitle}
-          </p>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="max-w-2xl">
+            <p className="text-base leading-relaxed text-text-primary/85 sm:text-lg [@media(max-aspect-ratio:1/1)]:hidden">
+              {t.subtitle}
+            </p>
+            <p className="hidden max-w-prose text-xs leading-snug text-text-primary/80 [@media(max-aspect-ratio:1/1)]:block sm:text-sm">
+              {t.subtitleCompact}
+            </p>
+          </div>
+
+          {/* Литеральные классы — иначе Tailwind JIT не подхватывает динамические `${var}:…` */}
+          <div className="flex flex-wrap items-center gap-3 gap-x-3 gap-y-3 [@media(max-aspect-ratio:1/1)]:gap-2 [@media(max-aspect-ratio:1/1)]:gap-x-2 [@media(max-aspect-ratio:1/1)]:gap-y-2">
             <a
               href="#order-form"
-              className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-bold tracking-tight text-dark-bg hover:brightness-105 hover:shadow-[0_0_26px_rgba(163,230,53,0.45)]"
+              className="inline-flex shrink-0 items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-bold tracking-tight text-dark-bg no-underline hover:brightness-105 hover:shadow-[0_0_26px_rgba(163,230,53,0.45)] [@media(max-aspect-ratio:1/1)]:px-4 [@media(max-aspect-ratio:1/1)]:py-2.5 [@media(max-aspect-ratio:1/1)]:text-xs [@media(max-aspect-ratio:1/1)]:sm:px-5 [@media(max-aspect-ratio:1/1)]:sm:text-sm"
             >
-              {t.ctaDemo}
+              <span className="[@media(max-aspect-ratio:1/1)]:hidden">{t.ctaDemo}</span>
+              <span className="hidden [@media(max-aspect-ratio:1/1)]:inline">{t.ctaDemoCompact}</span>
             </a>
             <a
               href="https://t.me/+998909262426"
-              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium tracking-tight text-text-primary hover:bg-white/8 hover:border-white/20"
+              className="inline-flex shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium tracking-tight text-text-primary no-underline hover:bg-white/8 hover:border-white/20 [@media(max-aspect-ratio:1/1)]:px-4 [@media(max-aspect-ratio:1/1)]:py-2.5 [@media(max-aspect-ratio:1/1)]:text-xs [@media(max-aspect-ratio:1/1)]:sm:px-5 [@media(max-aspect-ratio:1/1)]:sm:text-sm"
               target="_blank"
               rel="noopener noreferrer"
             >
-              {t.ctaBuy}
+              <span className="[@media(max-aspect-ratio:1/1)]:hidden">{t.ctaBuy}</span>
+              <span className="hidden [@media(max-aspect-ratio:1/1)]:inline">{t.ctaBuyCompact}</span>
             </a>
           </div>
 
-          <p className="text-sm tracking-wide text-text-primary/80">
-            {trustLines[language]}
+          <p className="text-sm tracking-wide text-text-primary/80 [@media(max-aspect-ratio:1/1)]:text-xs [@media(max-aspect-ratio:1/1)]:sm:text-[0.8125rem]">
+            <span className="[@media(max-aspect-ratio:1/1)]:hidden">{t.trustLine}</span>
+            <span className="hidden [@media(max-aspect-ratio:1/1)]:inline">{t.trustLineCompact}</span>
           </p>
         </div>
 

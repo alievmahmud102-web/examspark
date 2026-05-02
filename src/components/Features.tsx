@@ -125,7 +125,7 @@ export function Features() {
                   ].join(" ")}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="flex items-start gap-4">
+                  <div className="flex flex-nowrap items-start gap-4">
                     <div className="relative mt-0.5 inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-accent/14 text-text-primary transition-transform duration-300 ease-in-out group-hover:-translate-y-1">
                       <div
                         aria-hidden="true"

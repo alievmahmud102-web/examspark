@@ -14,6 +14,13 @@ type TranslationSchema = {
     subtitle: string;
     ctaDemo: string;
     ctaBuy: string;
+    /** Когда высота ≥ ширины (портрет / узкое окно) */
+    titleCompact: string;
+    subtitleCompact: string;
+    ctaDemoCompact: string;
+    ctaBuyCompact: string;
+    trustLine: string;
+    trustLineCompact: string;
   };
   features: {
     sectionTitle: string;
@@ -95,6 +102,13 @@ const emptyTranslation: TranslationSchema = {
       "Language Vision в Ташкенте — мини-группы 4–6 человек, преподаватели с IELTS 7.0+ и структурированная программа с измеримым прогрессом каждую неделю. Идёт набор в новый IELTS поток, количество мест ограничено.",
     ctaDemo: "Записаться на бесплатный пробный урок",
     ctaBuy: "Написать в Telegram",
+    titleCompact: "IELTS 6.5+ за 3-6 месяцев",
+    subtitleCompact:
+      "Language Vision Ташкент: мини-группы, IELTS 7.0+, структурированная программа. Набор в новый поток открыт!",
+    ctaDemoCompact: "Пробный урок",
+    ctaBuyCompact: "Telegram",
+    trustLine: "★ Более 500+ учеников уже улучшили свои результаты IELTS",
+    trustLineCompact: "★ 500+ учеников улучшили IELTS",
   },
   features: {
     sectionTitle: "Почему выбирают Language Vision",
@@ -270,6 +284,13 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
         "Language Vision in Tashkent — small groups of 4–6 students, teachers with IELTS 7.0+, and a structured program with measurable weekly progress. New IELTS groups are open with limited seats.",
       ctaDemo: "Book a free trial lesson",
       ctaBuy: "Message us on Telegram",
+      titleCompact: "IELTS 6.5+ in 3-6 months",
+      subtitleCompact:
+        "Language Vision, Tashkent: mini-groups, IELTS 7.0+, structured program. New intake is open!",
+      ctaDemoCompact: "Trial lesson",
+      ctaBuyCompact: "Telegram",
+      trustLine: "★ Over 500+ students already improved their IELTS results",
+      trustLineCompact: "★ 500+ students improved IELTS",
     },
     features: {
       sectionTitle: "Why students choose Language Vision",
@@ -439,6 +460,13 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
         "Language Vision, Toshkent — 4–6 kishilik mini-guruhlar, IELTS 7.0+ darajadagi ustozlar va har hafta o‘lchanadigan progress. Yangi IELTS oqimi uchun yozilish ochiq, joylar cheklangan.",
       ctaDemo: "Bepul sinov darsiga yozilish",
       ctaBuy: "Telegramda yozish",
+      titleCompact: "IELTS 6.5+ 3-6 oyda",
+      subtitleCompact:
+        "Language Vision, Toshkent: mini-guruhlar, IELTS 7.0+, tuzilgan dastur. Yangi oqim uchun yozilish ochiq!",
+      ctaDemoCompact: "Sinov darsi",
+      ctaBuyCompact: "Telegram",
+      trustLine: "★ 500+ o'quvchi IELTS natijalarini allaqachon yaxshiladi",
+      trustLineCompact: "★ 500+ o'quvchi IELTSni yaxshiladi",
     },
     features: {
       sectionTitle: "Nima uchun Language Vision tanlanadi",
