@@ -39,9 +39,14 @@ export function Hero() {
 
   const t = translations[language].hero;
   const accentPhrases: Record<LanguageCode, string> = {
-    ru: "1 день",
-    en: "1 day",
-    uz: "1 kunda",
+    ru: "3-6",
+    en: "3-6",
+    uz: "3-6",
+  };
+  const trustLines: Record<LanguageCode, string> = {
+    ru: "★ Более 500+ учеников уже улучшили свои результаты IELTS",
+    en: "★ Over 500+ students already improved their IELTS results",
+    uz: "★ 500+ o'quvchi IELTS natijalarini allaqachon yaxshiladi",
   };
   const accentPhrase = accentPhrases[language];
   const [titlePrefix, titleSuffix = ""] = t.title.split(accentPhrase);
@@ -72,21 +77,23 @@ export function Hero() {
 
           <div className="flex flex-wrap items-center gap-3">
             <a
-              href="#demo"
+              href="#order-form"
               className="inline-flex items-center justify-center rounded-full bg-accent px-6 py-3 text-sm font-bold tracking-tight text-dark-bg hover:brightness-105 hover:shadow-[0_0_26px_rgba(163,230,53,0.45)]"
             >
               {t.ctaDemo}
             </a>
             <a
-              href="#order-form"
+              href="https://t.me/+998909262426"
               className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-6 py-3 text-sm font-medium tracking-tight text-text-primary hover:bg-white/8 hover:border-white/20"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               {t.ctaBuy}
             </a>
           </div>
 
           <p className="text-sm tracking-wide text-text-primary/80">
-            ★ ★ ★ ★ ★ Успешно используют более 50 учебных центров
+            {trustLines[language]}
           </p>
         </div>
 

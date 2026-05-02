@@ -22,11 +22,11 @@ const unbounded = Unbounded({
 export const metadata: Metadata = {
   metadataBase: new URL("https://example.com"),
   title: {
-    default: "ExamSpark - Сайт учебного центра за 1 день",
-    template: "%s | ExamSpark",
+    default: "Language Vision - IELTS 6.5+ in 3-6 months",
+    template: "%s | Language Vision",
   },
   description:
-    "Готовый шаблон сайта для учебного центра ЕГЭ/ОГЭ/ЦТ за $300 с квизом, расписанием и формой заявок. Ready template for education centers. O'quv markazi uchun tayyor sayt shabloni.",
+    "Language Vision in Tashkent helps teenagers and students prepare for IELTS 6.5+ in 3-6 months through small groups, experienced teachers, and a structured program.",
   alternates: {
     canonical: "/",
     languages: {
@@ -36,17 +36,17 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "ExamSpark - Template for education center",
+    title: "Language Vision - IELTS preparation center",
     description:
-      "RU / EN / UZ: быстрый запуск лендинга учебного центра за 1 день.",
+      "Prepare for IELTS 6.5+ in 3-6 months with Language Vision, Tashkent.",
     url: "/",
-    siteName: "ExamSpark",
+    siteName: "Language Vision",
     images: [
       {
         url: "/og-image.svg",
         width: 1200,
         height: 630,
-        alt: "ExamSpark site template preview",
+        alt: "Language Vision IELTS preparation center",
       },
     ],
     locale: "ru_RU",
@@ -55,8 +55,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ExamSpark - Education center template",
-    description: "Launch your center website in one day for $300.",
+    title: "Language Vision - IELTS preparation in Tashkent",
+    description: "IELTS 6.5+ in 3-6 months for teenagers and students.",
     images: ["/og-image.svg"],
   },
 };

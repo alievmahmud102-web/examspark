@@ -44,15 +44,15 @@ export function SiteFooter() {
         <p className="text-zinc-400">{t.rights.replace(/202\d/g, "2026")}</p>
         <div className="flex flex-wrap items-center gap-5 md:justify-end">
           <a
-            href="https://t.me/aviron153"
+            href="tel:+998909262426"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white/85 hover:text-accent"
           >
-            {t.telegramLabel}: @aviron153
+            {t.telegramLabel}: +998 90 926 24 26
           </a>
           <p className="text-white/70">
-            {t.languagesLabel}: <span className="text-white">RU / EN / UZ</span>
+            {t.languagesLabel}: <span className="text-white">@language_vision | Ташкент, Буюк Ипак Йули</span>
           </p>
         </div>
       </div>

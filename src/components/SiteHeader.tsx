@@ -47,7 +47,7 @@ export function SiteHeader() {
           href="#hero"
           className="text-sm font-black tracking-tight text-text-primary sm:text-base"
         >
-          ExamSpark
+          Language Vision
         </a>
 
         <button
@@ -63,10 +63,10 @@ export function SiteHeader() {
         <div className="hidden items-center gap-6 md:flex">
           <nav className="flex items-center gap-5 text-sm font-medium tracking-tight text-text-primary/75">
             <a href="#features" className="hover:text-accent">
-              Features
+              Programs
             </a>
             <a href="#pricing" className="hover:text-accent">
-              Pricing
+              Results
             </a>
             <a href="#faq" className="hover:text-accent">
               FAQ
@@ -94,14 +94,14 @@ export function SiteHeader() {
             onClick={() => setIsMenuOpen(false)}
             className="text-sm font-medium tracking-tight text-text-primary/85"
           >
-            Features
+            Programs
           </a>
           <a
             href="#pricing"
             onClick={() => setIsMenuOpen(false)}
             className="text-sm font-medium tracking-tight text-text-primary/85"
           >
-            Pricing
+            Results
           </a>
           <a
             href="#faq"
